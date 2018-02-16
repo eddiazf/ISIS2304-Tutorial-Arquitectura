@@ -175,9 +175,12 @@ public class DAOBebedor {
 	public void updateBebedor(Bebedor bebedor) throws SQLException, Exception {
 
 		StringBuilder sql = new StringBuilder();
-		sql.append(String.format("UPDATE %s.BEBEDORES SET ", USUARIO));
-		sql.append(String.format("NOMBRE = '%1$s' AND CIUDAD = '%2$s' AND PRESUPUESTO = '%3$s' ", bebedor.getNombre(), bebedor.getCiudad(), bebedor.getPresupuesto()));
-		
+		sql.append (String.format ("UPDATE %s.BEBEDORES ", USUARIO));
+		sql.append (String.format (
+				"SET NOMBRE = '%1$s', CIUDAD = '%2$s', PRESUPUESTO = '%3$s' ",
+				bebedor.getNombre (), bebedor.getCiudad (),
+				bebedor.getPresupuesto ()));
+		sql.append ("WHERE ID = " + bebedor.getId ());
 		System.out.println(sql);
 		
 		PreparedStatement prepStmt = conn.prepareStatement(sql.toString());
